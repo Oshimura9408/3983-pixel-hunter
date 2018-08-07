@@ -1,7 +1,7 @@
 'use strict';
 
-const RIGHT_ARROW = 37;
-const LEFT_ARROW = 39;
+const RIGHT_ARROW = 39;
+const LEFT_ARROW = 37;
 
 const mainElement = document.querySelector(`#main`);
 
@@ -23,10 +23,10 @@ const select = (index) => {
 document.addEventListener(`keydown`, (evt) => {
   switch (evt.keyCode) {
     case RIGHT_ARROW:
-      select(current - 1);
+      select(current + 1);
       break;
     case LEFT_ARROW:
-      select(current + 1);
+      select(current - 1);
       break;
   }
 });
