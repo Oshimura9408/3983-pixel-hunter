@@ -43,4 +43,4 @@ prevSlide.addEventListener(`click`, () => {
   select(current - 1);
 });
 
-select(0);
+select(1);
