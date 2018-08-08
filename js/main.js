@@ -6,9 +6,7 @@ const LEFT_ARROW = 37;
 const sliderContainer = document.querySelector(`#main`);
 
 const selectSlide = (element) => {
-  while (sliderContainer.firstChild) {
-    sliderContainer.removeChild(sliderContainer.firstChild);
-  }
+  sliderContainer.innerHTML = ``;
   sliderContainer.appendChild(element.cloneNode(true));
 };
 
