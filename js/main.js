@@ -23,8 +23,7 @@ const showSlide = (index) => {
   selectSlide(screens[current]);
 };
 
-// Функция переключения слайдов клавишами
-const keyPress = (evt) => {
+const onKeyPress = (evt) => {
   switch (evt.keyCode) {
     case RIGHT_ARROW:
       showSlide(current + 1);
@@ -57,19 +56,16 @@ document.querySelector(`body`).insertAdjacentHTML(`beforeEnd`, `
 </div>
 `);
 
-// элементы управления
-const arrows = document.querySelector(`.arrows__wrap`);
-const nextSlide = arrows.querySelector(`.arrows__btn:last-child`);
-const prevSlide = arrows.querySelector(`.arrows__btn`);
+const onArrowsPress = (evt) => {
+  if (evt.target.innerText === `->`) {
+    showSlide(current + 1);
+  } else if (evt.target.innerText === `<-`) {
+    showSlide(current - 1);
+  }
+};
 
-document.addEventListener(`keydown`, keyPress);
+document.addEventListener(`click`, onArrowsPress);
 
-nextSlide.addEventListener(`click`, () => {
-  showSlide(current + 1);
-});
-
-prevSlide.addEventListener(`click`, () => {
-  showSlide(current - 1);
-});
+document.addEventListener(`keydown`, onKeyPress);
 
 showSlide(1);
