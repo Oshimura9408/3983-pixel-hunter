@@ -54,15 +54,20 @@ document.querySelector(`body`).insertAdjacentHTML(`beforeEnd`, `
 </div>
 `);
 
-const onArrowsPress = (evt) => {
-  if (evt.target.innerText === `->`) {
-    showSlide(current + 1);
-  } else if (evt.target.innerText === `<-`) {
-    showSlide(current - 1);
-  }
+const arrows = document.querySelector(`.arrows__wrap`);
+const nextSlideButton = arrows.querySelector(`.arrows__btn:last-child`);
+const prevSlideButton = arrows.querySelector(`.arrows__btn`);
+
+const onArrowLeftPress = () => {
+  showSlide(current - 1);
 };
 
-document.addEventListener(`click`, onArrowsPress);
+const onArrowRightPress = () => {
+  showSlide(current + 1);
+};
+
+nextSlideButton.addEventListener(`click`, onArrowRightPress);
+prevSlideButton.addEventListener(`click`, onArrowLeftPress);
 
 document.addEventListener(`keydown`, onKeyPress);
 
