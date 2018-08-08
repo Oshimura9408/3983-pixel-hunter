@@ -15,13 +15,19 @@ const screens = Array.from(document.querySelectorAll(`template`)).map((it) => it
 let current = 0;
 const showSlide = (index) => {
   let sliderNumber = index;
-  sliderNumber = sliderNumber < 0 ? screens.length - 1 : sliderNumber;
-  sliderNumber = sliderNumber >= screens.length ? 0 : sliderNumber;
+  const len = screens.length;
+  if (index < 0) {
+    sliderNumber = len - 1;
+  } else if (index >= len) {
+    sliderNumber = 0;
+  } else {
+    sliderNumber = index;
+  }
   current = sliderNumber;
   selectSlide(screens[current]);
 };
 
-const onKeyPress = (evt) => {
+const onKeyDown = (evt) => {
   switch (evt.keyCode) {
     case RIGHT_ARROW:
       showSlide(current + 1);
@@ -69,6 +75,6 @@ const onArrowRightPress = () => {
 nextSlideButton.addEventListener(`click`, onArrowRightPress);
 prevSlideButton.addEventListener(`click`, onArrowLeftPress);
 
-document.addEventListener(`keydown`, onKeyPress);
+document.addEventListener(`keydown`, onKeyDown);
 
 showSlide(1);
