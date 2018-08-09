@@ -14,7 +14,7 @@ const screens = Array.from(document.querySelectorAll(`template`)).map((it) => it
 
 let current = 0;
 const showSlide = (index) => {
-  let sliderNumber = index;
+  let sliderNumber;
   const len = screens.length;
   if (index < 0) {
     sliderNumber = len - 1;
@@ -22,8 +22,8 @@ const showSlide = (index) => {
     sliderNumber = 0;
   } else {
     sliderNumber = index;
+    current = sliderNumber;
   }
-  current = sliderNumber;
   selectSlide(screens[current]);
 };
 
