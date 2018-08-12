@@ -1,4 +1,4 @@
-import {selectSlide, render, resetForm} from "./util.js";
+import {selectSlide, render} from "./util.js";
 import gameTwo from './game-2.js';
 import greeting from './greeting.js';
 
