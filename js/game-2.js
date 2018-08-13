@@ -58,6 +58,7 @@ const checkSelect = () => {
   let selectOption = gameForm.querySelectorAll(`input[type="radio"]:checked`);
   if (selectOption.length === 1) {
     selectSlide(gameThree);
+    gameForm.reset();
   }
 };
 

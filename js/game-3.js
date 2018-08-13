@@ -55,6 +55,7 @@ const backButton = element.querySelector(`.back`);
 
 const selectPicture = () => {
   selectSlide(stats);
+  gameForm.reset();
 };
 
 const backScreen = () => {

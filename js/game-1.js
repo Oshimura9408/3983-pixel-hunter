@@ -15,7 +15,7 @@ const template = `
     </button>
     <div class="game__timer">NN</div>
     <div class="game__lives">
-      <img src="img/heart__empty.svg" class="game__heart" alt=" Missed Life" width="31" height="27">
+      <img src="img/heart__empty.svg" class="game__heart" alt="Life" width="31" height="27">
       <img src="img/heart__full.svg" class="game__heart" alt="Life" width="31" height="27">
       <img src="img/heart__full.svg" class="game__heart" alt="Life" width="31" height="27">
     </div>
@@ -68,7 +68,9 @@ const gameForm = element.querySelector(`.game__content`);
 const checkSelect = () => {
   let selectOption = gameForm.querySelectorAll(`input[type="radio"]:checked`);
   if (selectOption.length === 2) {
+    gameForm.reset();
     selectSlide(gameTwo);
+    gameForm.reset();
   }
 };
 
@@ -82,5 +84,6 @@ const backScreen = () => {
 backButton.addEventListener(`click`, backScreen);
 
 gameForm.addEventListener(`click`, checkSelect);
+
 
 export default element;
