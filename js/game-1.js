@@ -66,12 +66,12 @@ const element = render(template);
 const gameForm = element.querySelector(`.game__content`);
 
 const checkSelect = () => {
-  let selectOption = gameForm.querySelectorAll(`input[type="radio"]:checked`);
-  if (selectOption.length === 2) {
-    gameForm.reset();
+  let selectOptions = gameForm.querySelectorAll(`input`);
+  if ([...selectOptions].filter((select) => select.checked).length === 2) {
     selectSlide(gameTwo);
     gameForm.reset();
   }
+  console.log([...selectOptions]);
 };
 
 const backButton = element.querySelector(`.back`);

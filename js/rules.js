@@ -47,9 +47,9 @@ const backScreen = () => {
 };
 
 const checkInput = () => {
-  let number = inputEl.value;
+  let name = inputEl.value;
 
-  if (number.trim().length >= 3) {
+  if (name.trim().length >= 3) {
     nextButton.disabled = false;
   } else {
     nextButton.disabled = true;

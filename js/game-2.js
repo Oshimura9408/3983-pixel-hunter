@@ -55,8 +55,8 @@ const element = render(template);
 const gameForm = element.querySelector(`.game__content`);
 
 const checkSelect = () => {
-  let selectOption = gameForm.querySelectorAll(`input[type="radio"]:checked`);
-  if (selectOption.length === 1) {
+  let selectOptions = gameForm.querySelectorAll(`input`);
+  if ([...selectOptions].filter((select) => select.checked).length === 1) {
     selectSlide(gameThree);
     gameForm.reset();
   }
