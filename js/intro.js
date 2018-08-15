@@ -16,9 +16,6 @@ const changeScreen = () => {
   selectSlide(greeting);
 };
 
-// startButton.addEventListener(`click`, () => {
-//   changeScreen(greeting);
-// });
 startButton.addEventListener(`click`, changeScreen);
 
 export default element;

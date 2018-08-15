@@ -84,5 +84,4 @@ backButton.addEventListener(`click`, backScreen);
 
 gameForm.addEventListener(`click`, checkSelect);
 
-
 export default element;
