@@ -71,7 +71,6 @@ const checkSelect = () => {
     selectSlide(gameTwo);
     gameForm.reset();
   }
-  console.log([...selectOptions]);
 };
 
 const backButton = element.querySelector(`.back`);
