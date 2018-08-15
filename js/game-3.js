@@ -60,7 +60,6 @@ const selectPicture = () => {
 
 const backScreen = () => {
   selectSlide(greeting);
-  gameForm.reset();
 };
 
 backButton.addEventListener(`click`, backScreen);
