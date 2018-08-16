@@ -53,10 +53,11 @@ const template = `
 const element = render(template);
 
 const gameForm = element.querySelector(`.game__content`);
+const options = gameForm.querySelectorAll(`input`);
+const maxChoice = 1;
 
 const checkSelect = () => {
-  let selectOptions = gameForm.querySelectorAll(`input`);
-  if ([...selectOptions].filter((select) => select.checked).length === 1) {
+  if ([...options].filter((select) => select.checked).length === maxChoice) {
     selectSlide(gameThree);
     gameForm.reset();
   }
