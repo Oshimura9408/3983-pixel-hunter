@@ -1,7 +1,7 @@
 # Личный проект «Пиксель хантер» [![Build status][travis-image]][travis-url]
 
 * Студент: [Максим Федоров](https://up.htmlacademy.ru/ecmascript/6/user/3983).
-* Наставник: [Борис Лобанов](https://htmlacademy.ru/profile/id848359)
+* Наставник: [Артем Черкасов](https://htmlacademy.ru/profile/id530727)
 
 ---
 
