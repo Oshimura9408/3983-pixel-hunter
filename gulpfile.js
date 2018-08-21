@@ -111,6 +111,15 @@ gulp.task(`build`, [`assemble`], () => {
   gulp.start(`imagemin`);
 });
 
+gulp.task(`scripts`, () => {
+  return gulp.src(`js/main.js`)
+    .pipe(plumber())
+    .pipe(sourcemaps.init())
+    .pipe(rollup({}, `iife`))
+    .pipe(sourcemaps.write(``))
+    .pipe(gulp.dest(`build/js`));
+});
+
 gulp.task(`test`, () => {
   return gulp
     .src([`js/**/*.test.js`])
@@ -122,13 +131,4 @@ gulp.task(`test`, () => {
     .pipe(mocha({
       reporter: `spec`
     }));
-});
-
-gulp.task(`scripts`, () => {
-  return gulp.src(`js/main.js`)
-    .pipe(plumber())
-    .pipe(sourcemaps.init())
-    .pipe(rollup({}, `iife`))
-    .pipe(sourcemaps.write(``))
-    .pipe(gulp.dest(`build/js`));
 });
