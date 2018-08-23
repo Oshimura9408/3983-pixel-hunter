@@ -7,53 +7,61 @@ export const INITIAL_GAME = {
 };
 
 const COUNT_ANSWERS = 10;
-const WRONG_ANSWER = 0;
 const NORMAL_ANSWER = 1;
 const SLOW_ANSWER = 2;
 const FAST_ANSWER = 3;
+const WRONG_ANSWER = 0;
+
+const WRONG_TIME = 0;
+const SLOW_TIME = 10;
+const NORMAL_TIME = 20;
 
 // let currentLevel = INITIAL_GAME.level;
 
-export const countAnswers = (answers, live) => {
-  // let currentAnswers = answers;
-  let countCorrectAnswers = 0;
-  let wrong = 0;
-  let normal = 0;
-  let fast = 0;
-  let slow = 0;
-  let score = 0;
-  let lives = live;
-
+export const countAnswers = (answers) => {
   if (answers.length < COUNT_ANSWERS) {
-    // currentAnswers = -1;
     return -1;
-  } else {
-    for (let i = 0; i < answers.length; i++) {
-
-      if (answers[i] === NORMAL_ANSWER) {
-        normal = normal + 1;
-        score = score + 100;
-        countCorrectAnswers = countCorrectAnswers + 1;
-      } else if (answers[i] === SLOW_ANSWER) {
-        slow = slow + 1;
-        score = score + 50;
-        countCorrectAnswers = countCorrectAnswers + 1;
-      } else if (answers[i] === FAST_ANSWER) {
-        fast = fast + 1;
-        score = score + 150;
-        countCorrectAnswers = countCorrectAnswers + 1;
-      } else if (answers[i] === WRONG_ANSWER) {
-        wrong = wrong + 1;
-        lives = lives - 1;
-      } if (wrong === 3) {
-        break;
-      }
-
-    }
-    if (countCorrectAnswers > 7) {
-      score = score + lives * 50;
-      return score;
-    }
-    return 0;
   }
+  return 1;
+};
+
+export const calculateScore = (answers, live) => {
+  if (live < 0) {
+    return null;
+  }
+
+  const result = answers.reduce((sumPoints, current) => {
+    if (current === NORMAL_ANSWER) {
+      sumPoints = sumPoints + 100;
+    } else if (current === SLOW_ANSWER) {
+      sumPoints = sumPoints + 50;
+    } else if (current === FAST_ANSWER) {
+      sumPoints = sumPoints + 150;
+    }
+    return sumPoints;
+  }, 0);
+
+  return result + live * 50;
+};
+
+export const calculateTime = (time) => {
+  if (time <= WRONG_TIME) {
+    return WRONG_ANSWER;
+  }
+
+  if (time < SLOW_TIME) {
+    return SLOW_ANSWER;
+  }
+
+  if (time <= NORMAL_TIME) {
+    return NORMAL_ANSWER;
+  }
+  return FAST_ANSWER;
+};
+
+export const changeLevel = (countLevel) => {
+  if (countLevel <= INITIAL_GAME.level) {
+    return INITIAL_GAME.level;
+  }
+  return countLevel;
 };
