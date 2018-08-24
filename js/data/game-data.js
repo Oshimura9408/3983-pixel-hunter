@@ -12,17 +12,17 @@ const SLOW_ANSWER = 2;
 const FAST_ANSWER = 3;
 const WRONG_ANSWER = 0;
 
+const POINTS_NORMAL = 100;
+const POINTS_SLOW = 50;
+const POINTS_FAST = 150;
+const POINTS_LIFE = 50;
+
 const WRONG_TIME = 0;
 const SLOW_TIME = 10;
 const NORMAL_TIME = 20;
 
-// let currentLevel = INITIAL_GAME.level;
-
 export const countAnswers = (answers) => {
-  if (answers.length < COUNT_ANSWERS) {
-    return -1;
-  }
-  return 1;
+  return answers.length < COUNT_ANSWERS ? -1 : 1;
 };
 
 export const calculateScore = (answers, live) => {
@@ -32,16 +32,18 @@ export const calculateScore = (answers, live) => {
 
   const result = answers.reduce((sumPoints, current) => {
     if (current === NORMAL_ANSWER) {
-      sumPoints = sumPoints + 100;
-    } else if (current === SLOW_ANSWER) {
-      sumPoints = sumPoints + 50;
-    } else if (current === FAST_ANSWER) {
-      sumPoints = sumPoints + 150;
+      return sumPoints + POINTS_NORMAL;
+    }
+    if (current === SLOW_ANSWER) {
+      return sumPoints + POINTS_SLOW;
+    }
+    if (current === FAST_ANSWER) {
+      return sumPoints + POINTS_FAST;
     }
     return sumPoints;
   }, 0);
 
-  return result + live * 50;
+  return result + live * POINTS_LIFE;
 };
 
 export const calculateTime = (time) => {
