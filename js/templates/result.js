@@ -1,6 +1,6 @@
-import {render} from "./util.js";
+import {render} from "../utils/util.js";
 import greeting from './greeting.js';
-import {selectSlide} from "./util";
+import {selectSlide} from "../utils/util";
 
 const template = `
 <header class="header">

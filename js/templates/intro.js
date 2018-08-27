@@ -1,4 +1,4 @@
-import {selectSlide, render} from './util.js';
+import {selectSlide, render} from '../utils/util.js';
 import greeting from './greeting.js';
 
 const template = `
