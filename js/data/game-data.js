@@ -1,8 +1,13 @@
 const INITIAL_GAME = {
-  level: `game-1`,
+  level: [0],
   lives: 3,
   time: 0
 };
+
+export const correct = [
+  [`paint`, `photo`],
+  `photo`
+];
 
 export const questionTypes = {
   TWO_IMG: `Угадайте для каждого изображения фото или рисунок?`,
@@ -10,8 +15,8 @@ export const questionTypes = {
   FIND_PAINT: `Найдите рисунок среди изображений?`
 };
 
-export const levels = {
-  'game-1': {
+export const questions = [
+  {
     type: `TWO_IMG`,
     description: questionTypes.TWO_IMG,
     options: [
@@ -33,11 +38,9 @@ export const levels = {
           height: 458
         }
       }
-    ],
-    correctAnswer: [`paint`, `photo`]
+    ]
   },
-
-  'game-2': {
+  {
     description: questionTypes.PHOTO_OR_PAINT,
     type: `PHOTO_OR_PAINT`,
     option: {
@@ -50,10 +53,9 @@ export const levels = {
       }
     }
   },
-
-  'game-3': {
-    description: questionTypes.FIND_PAINT,
+  {
     type: `FIND_PAINT`,
+    description: questionTypes.FIND_PAINT,
     options: [
       {
         image: {
@@ -83,36 +85,7 @@ export const levels = {
         isSelected: false
       }
     ]
-  },
-
-  'game-4': {
-
-  },
-
-  'game-5': {
-
-  },
-
-  'game-6': {
-
-  },
-
-  'game-7': {
-
-  },
-
-  'game-8': {
-
-  },
-
-  'game-9': {
-
-  },
-
-  'game-10': {
-
-  }
-};
+  }];
 
 const COUNT_ANSWERS = 10;
 const NORMAL_ANSWER = 1;
@@ -174,6 +147,20 @@ export const changeLevel = (countLevel) => {
     return INITIAL_GAME.level;
   }
   return countLevel;
+};
+
+export const changeLevels = (game, level) => {
+  if (typeof level !== `number`) {
+    throw new Error(`Level should be of type number`);
+  }
+
+  if (level < 0) {
+    throw new Error(`Level should not be negative value`);
+  }
+
+  return Object.assign({}, game, {
+    level
+  });
 };
 
 export default INITIAL_GAME;

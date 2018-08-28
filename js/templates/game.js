@@ -1,28 +1,52 @@
-import {render} from "../utils/util.js";
-import INITIAL_GAME, {levels} from '../data/game-data';
-import headerTemplate from './header';
-import renderQuestion from './renderQuestions';
-import renderStats from './renderStats';
+import {render, selectSlide} from "../utils/util";
+import renderHeader from '../templates/header';
+import renderQuestion from '../templates/renderQuestions';
+import INITIAL_GAME from '../data/game-data';
+import {questions, changeLevels} from '../data/game-data';
 
-const template = (state) => `
-${headerTemplate(state)}
-  <section class="game">
-    ${renderQuestion(levels[state.level])}
-    ${renderStats}
-  </section>
-`;
+let game;
 
-const element = render(template(INITIAL_GAME));
+const startGame = () => {
+  game = Object.assign({}, INITIAL_GAME);
 
-const gameForm = element.querySelector(`.game__content`);
-const options = gameForm.querySelectorAll(`input`);
-const maxChoice = 2;
+  const gameContainerElement = render();
+  const headerElement = render();
+  const levelElement = render();
 
-const checkSelect = () => {
-  if ([...options].filter((select) => select.checked).length === maxChoice) {
-  }
+  gameContainerElement.appendChild(headerElement);
+  gameContainerElement.appendChild(levelElement);
+
+  const getLevel = () => questions[game.level];
+
+  const updateGame = (state) => {
+    headerElement.innerHTML = renderHeader(state);
+    levelElement.innerHTML = renderQuestion(getLevel(state.level));
+  };
+
+  let gameChoice0 = null;
+  let gameChoice1 = null;
+
+  levelElement.addEventListener(`change`, (evt) => {
+    let target = evt.target;
+    if (target.name === `question1`) {
+      gameChoice0 = target.value;
+
+    }
+    if (target.name === `question2`) {
+      gameChoice1 = target.value;
+    }
+
+    if (gameChoice0 && gameChoice1) {
+      let nextLevel = 1;
+      game = changeLevels(game, nextLevel);
+      updateGame(game);
+    }
+  });
+
+  updateGame(game);
+  selectSlide(gameContainerElement);
 };
 
-gameForm.addEventListener(`click`, checkSelect);
+startGame();
 
-export default element;
+export default startGame;
