@@ -1,8 +1,8 @@
-const INITIAL_GAME = {
-  level: [0],
-  lives: 3,
+const INITIAL_GAME = Object.freeze({
+  level: 0,
+  lives: 2,
   time: 0
-};
+});
 
 export const correct = [
   [`paint`, `photo`],
@@ -32,6 +32,76 @@ export const questions = [
       {
         name: `question2`,
         image: {
+          url: `http://i.imgur.com/1KegWPz.jpg`, // animals
+          title: `Option 2`,
+          width: 468,
+          height: 458
+        }
+      }
+    ]
+  },
+  {
+    type: `PHOTO_OR_PAINT`,
+    description: questionTypes.PHOTO_OR_PAINT,
+    option: {
+      name: `question1`,
+      image: {
+        url: `http://i.imgur.com/1KegWPz.jpg`, // people
+        title: `Option 1`,
+        width: 705,
+        height: 455
+      }
+    }
+  },
+  {
+    type: `FIND_PAINT`,
+    description: questionTypes.FIND_PAINT,
+    options: [
+      {
+        image: {
+          url: `https://k32.kn3.net/5C7060EC5.jpg`, // people
+          title: `Option 1`,
+          width: 304,
+          height: 455
+        },
+        isSelected: false
+      },
+      {
+        image: {
+          url: `https://k42.kn3.net/CF42609C8.jpg`,
+          title: `Option 2`,
+          width: 304,
+          height: 455
+        },
+        isSelected: true
+      },
+      {
+        image: {
+          url: `https://k42.kn3.net/CF42609C8.jpg`,
+          title: `Option 3`,
+          width: 304,
+          height: 455
+        },
+        isSelected: false
+      }
+    ]
+  },
+  {
+    type: `TWO_IMG`,
+    description: questionTypes.TWO_IMG,
+    options: [
+      {
+        name: `question1`,
+        image: {
+          url: `https://k42.kn3.net/CF42609C8.jpg`, // people
+          title: `Option 1`,
+          width: 468,
+          height: 458
+        }
+      },
+      {
+        name: `question2`,
+        image: {
           url: `https://i.imgur.com/DiHM5Zb.jpg`, // animals
           title: `Option 2`,
           width: 468,
@@ -41,8 +111,8 @@ export const questions = [
     ]
   },
   {
-    description: questionTypes.PHOTO_OR_PAINT,
     type: `PHOTO_OR_PAINT`,
+    description: questionTypes.PHOTO_OR_PAINT,
     option: {
       name: `question1`,
       image: {
@@ -85,6 +155,89 @@ export const questions = [
         isSelected: false
       }
     ]
+  },
+  {
+    type: `TWO_IMG`,
+    description: questionTypes.TWO_IMG,
+    options: [
+      {
+        name: `question1`,
+        image: {
+          url: `http://i.imgur.com/1KegWPz.jpg`, // people
+          title: `Option 1`,
+          width: 468,
+          height: 458
+        }
+      },
+      {
+        name: `question2`,
+        image: {
+          url: `https://i.imgur.com/DiHM5Zb.jpg`, // animals
+          title: `Option 2`,
+          width: 468,
+          height: 458
+        }
+      }
+    ]
+  },
+  {
+    type: `PHOTO_OR_PAINT`,
+    description: questionTypes.PHOTO_OR_PAINT,
+    option: {
+      name: `question1`,
+      image: {
+        url: `http://i.imgur.com/DKR1HtB.jpg`, // people
+        title: `Option 1`,
+        width: 705,
+        height: 455
+      }
+    }
+  },
+  {
+    type: `FIND_PAINT`,
+    description: questionTypes.FIND_PAINT,
+    options: [
+      {
+        image: {
+          url: `https://k42.kn3.net/CF42609C8.jpg`, // people
+          title: `Option 1`,
+          width: 304,
+          height: 455
+        },
+        isSelected: false
+      },
+      {
+        image: {
+          url: `https://k42.kn3.net/CF42609C8.jpg`,
+          title: `Option 2`,
+          width: 304,
+          height: 455
+        },
+        isSelected: true
+      },
+      {
+        image: {
+          url: `http://i.imgur.com/DKR1HtB.jpg`,
+          title: `Option 3`,
+          width: 304,
+          height: 455
+        },
+        isSelected: false
+      }
+    ]
+  },
+  {
+    type: `PHOTO_OR_PAINT`,
+    description: questionTypes.PHOTO_OR_PAINT,
+    option: {
+      name: `question1`,
+      image: {
+        url: `http://i.imgur.com/1KegWPz.jpg`, // people
+        title: `Option 1`,
+        width: 705,
+        height: 455
+      }
+    }
   }];
 
 const COUNT_ANSWERS = 10;
@@ -161,6 +314,11 @@ export const changeLevels = (game, level) => {
   return Object.assign({}, game, {
     level
   });
+};
+
+export const nextLevel = (curGame) => {
+  curGame++;
+  return curGame;
 };
 
 export default INITIAL_GAME;
