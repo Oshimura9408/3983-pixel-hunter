@@ -1,6 +1,6 @@
 import {selectSlide, render} from '../utils/util.js';
 import greeting from './greeting.js';
-import startGame from './game.js';
+import game from './game.js';
 
 const template = `
 <header class="header">
@@ -39,29 +39,25 @@ const inputEl = element.querySelector(`.rules__input`);
 const backButton = element.querySelector(`.back`);
 const minName = 3;
 
-const changeScreen = () => {
-  // selectSlide(startGame);
-  startGame();
+const nextScreen = () => {
+  selectSlide(game);
 };
 
 const backScreen = () => {
   selectSlide(greeting);
 };
 
-const checkInput = () => {
+inputEl .addEventListener(`input`, () => {
   let name = inputEl.value;
 
   if (name.trim().length >= minName) {
-    nextButton.disabled = false;
+    nextButton .disabled = false;
   } else {
-    nextButton.disabled = true;
+    nextButton .disabled = true;
   }
-};
+});
 
-nextButton.addEventListener(`click`, changeScreen);
-
-inputEl.addEventListener(`input`, checkInput);
-
+nextButton.addEventListener(`click`, nextScreen);
 backButton.addEventListener(`click`, backScreen);
 
 export default element;

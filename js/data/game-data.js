@@ -1,8 +1,18 @@
-const INITIAL_GAME = Object.freeze({
+import {selectSlide} from "../utils/util";
+import result from "../templates/result";
+
+const INITIAL_GAME = {
   level: 0,
-  lives: 2,
-  time: 0
-});
+  lives: 3,
+  currentQuestion: 0,
+  test: [3]
+};
+
+export const LEVEL = {
+  INITIAL: 0,
+  MAX: 10,
+  END: -1
+};
 
 export const correct = [
   [`paint`, `photo`],
@@ -38,7 +48,8 @@ export const questions = [
           height: 458
         }
       }
-    ]
+    ],
+    correctT: `photo,photo`
   },
   {
     type: `PHOTO_OR_PAINT`,
@@ -108,7 +119,8 @@ export const questions = [
           height: 458
         }
       }
-    ]
+    ],
+    correctT: `photo,photo`
   },
   {
     type: `PHOTO_OR_PAINT`,
@@ -178,7 +190,8 @@ export const questions = [
           height: 458
         }
       }
-    ]
+    ],
+    correctT: `photo,photo`
   },
   {
     type: `PHOTO_OR_PAINT`,
@@ -240,9 +253,8 @@ export const questions = [
     }
   }];
 
-const COUNT_ANSWERS = 10;
-const NORMAL_ANSWER = 1;
-const SLOW_ANSWER = 2;
+const NORMAL_ANSWER = 2;
+const SLOW_ANSWER = 1;
 const FAST_ANSWER = 3;
 const WRONG_ANSWER = 0;
 
@@ -255,8 +267,15 @@ const WRONG_TIME = 0;
 const SLOW_TIME = 10;
 const NORMAL_TIME = 20;
 
+export const check = (chose, index) => {
+  if (chose === questions[index - 1].correctT) {
+    return true;
+  }
+  return false;
+};
+
 export const countAnswers = (answers) => {
-  return answers.length < COUNT_ANSWERS ? -1 : 1;
+  return answers.length < LEVEL.MAX ? -1 : 1;
 };
 
 export const calculateScore = (answers, live) => {
@@ -295,30 +314,28 @@ export const calculateTime = (time) => {
   return FAST_ANSWER;
 };
 
-export const changeLevel = (countLevel) => {
-  if (countLevel <= INITIAL_GAME.level) {
-    return INITIAL_GAME.level;
+// export const changeLevel = (countLevel) => {
+//   if (countLevel <= INITIAL_GAME.level) {
+//     return INITIAL_GAME.level;
+//   }
+//   return countLevel;
+// };
+
+export const calculateLives = (lifeValue, answerType) => {
+  const newLifeValue = lifeValue - !answerType;
+  if (newLifeValue <= 0) {
+    selectSlide(result);
   }
-  return countLevel;
+  return newLifeValue;
 };
 
-export const changeLevels = (game, level) => {
-  if (typeof level !== `number`) {
-    throw new Error(`Level should be of type number`);
+
+export const changeLevels = (countLevel) => {
+  if (countLevel >= LEVEL.MAX) {
+    return LEVEL.END;
   }
 
-  if (level < 0) {
-    throw new Error(`Level should not be negative value`);
-  }
-
-  return Object.assign({}, game, {
-    level
-  });
-};
-
-export const nextLevel = (curGame) => {
-  curGame++;
-  return curGame;
+  return countLevel + 1;
 };
 
 export default INITIAL_GAME;
