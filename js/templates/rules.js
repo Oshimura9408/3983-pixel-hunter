@@ -1,6 +1,8 @@
 import {selectSlide, render} from '../utils/util.js';
 import greeting from './greeting.js';
 import game from './game.js';
+import renderGameScreen from '../components/renderGameScreen.js';
+import INITIAL_GAME from '../data/game-data';
 
 const template = `
 <header class="header">
@@ -40,7 +42,7 @@ const backButton = element.querySelector(`.back`);
 const minName = 3;
 
 const nextScreen = () => {
-  selectSlide(game);
+  selectSlide(renderGameScreen(INITIAL_GAME));
 };
 
 const backScreen = () => {

@@ -1,11 +1,18 @@
 import {selectSlide} from "../utils/util";
 import result from "../templates/result";
+import answersTypes from './answersType';
 
 const INITIAL_GAME = {
   level: 0,
   lives: 3,
   currentQuestion: 0,
-  test: [3]
+  answers: []
+};
+
+export const STATE = {
+  lives: 3,
+  answers: [],
+  currentQuestion: 0,
 };
 
 export const LEVEL = {
@@ -14,10 +21,23 @@ export const LEVEL = {
   END: -1
 };
 
-export const correct = [
-  [`paint`, `photo`],
-  `photo`
+export const stats = [
+  answersTypes.UNKNOWN,
+  answersTypes.UNKNOWN,
+  answersTypes.UNKNOWN,
+  answersTypes.UNKNOWN,
+  answersTypes.UNKNOWN,
+  answersTypes.UNKNOWN,
+  answersTypes.UNKNOWN,
+  answersTypes.UNKNOWN,
+  answersTypes.UNKNOWN,
+  answersTypes.UNKNOWN
 ];
+
+// export const correct = [
+//   [`paint`, `photo`],
+//   `photo`
+// ];
 
 export const questionTypes = {
   TWO_IMG: `Угадайте для каждого изображения фото или рисунок?`,
@@ -49,7 +69,7 @@ export const questions = [
         }
       }
     ],
-    correctT: `photo,photo`
+    correctAnswers: `photo,photo`
   },
   {
     type: `PHOTO_OR_PAINT`,
@@ -62,7 +82,8 @@ export const questions = [
         width: 705,
         height: 455
       }
-    }
+    },
+    correctAnswers: `photo`
   },
   {
     type: `FIND_PAINT`,
@@ -120,7 +141,7 @@ export const questions = [
         }
       }
     ],
-    correctT: `photo,photo`
+    correctAnswers: `photo,photo`
   },
   {
     type: `PHOTO_OR_PAINT`,
@@ -133,7 +154,8 @@ export const questions = [
         width: 705,
         height: 455
       }
-    }
+    },
+    correctAnswers: `photo`
   },
   {
     type: `FIND_PAINT`,
@@ -191,7 +213,7 @@ export const questions = [
         }
       }
     ],
-    correctT: `photo,photo`
+    correctAnswers: `photo,photo`
   },
   {
     type: `PHOTO_OR_PAINT`,
@@ -204,7 +226,8 @@ export const questions = [
         width: 705,
         height: 455
       }
-    }
+    },
+    correctAnswers: `photo`
   },
   {
     type: `FIND_PAINT`,
@@ -250,33 +273,34 @@ export const questions = [
         width: 705,
         height: 455
       }
-    }
+    },
+    correctAnswers: `photo`
   }];
 
 const NORMAL_ANSWER = 2;
 const SLOW_ANSWER = 1;
 const FAST_ANSWER = 3;
 const WRONG_ANSWER = 0;
-
+//
 const POINTS_NORMAL = 100;
 const POINTS_SLOW = 50;
 const POINTS_FAST = 150;
 const POINTS_LIFE = 50;
-
-const WRONG_TIME = 0;
-const SLOW_TIME = 10;
-const NORMAL_TIME = 20;
+//
+// const WRONG_TIME = 0;
+// const SLOW_TIME = 10;
+// const NORMAL_TIME = 20;
 
 export const check = (chose, index) => {
-  if (chose === questions[index - 1].correctT) {
+  if (chose === questions[index - 1].correctAnswers) {
     return true;
   }
   return false;
 };
 
-export const countAnswers = (answers) => {
-  return answers.length < LEVEL.MAX ? -1 : 1;
-};
+// export const countAnswers = (answers) => {
+//   return answers.length < LEVEL.MAX ? -1 : 1;
+// };
 
 export const calculateScore = (answers, live) => {
   if (live < 0) {
@@ -298,21 +322,21 @@ export const calculateScore = (answers, live) => {
 
   return result + live * POINTS_LIFE;
 };
-
-export const calculateTime = (time) => {
-  if (time <= WRONG_TIME) {
-    return WRONG_ANSWER;
-  }
-
-  if (time < SLOW_TIME) {
-    return SLOW_ANSWER;
-  }
-
-  if (time <= NORMAL_TIME) {
-    return NORMAL_ANSWER;
-  }
-  return FAST_ANSWER;
-};
+//
+// export const calculateTime = (time) => {
+//   if (time <= WRONG_TIME) {
+//     return WRONG_ANSWER;
+//   }
+//
+//   if (time < SLOW_TIME) {
+//     return SLOW_ANSWER;
+//   }
+//
+//   if (time <= NORMAL_TIME) {
+//     return NORMAL_ANSWER;
+//   }
+//   return FAST_ANSWER;
+// };
 
 // export const changeLevel = (countLevel) => {
 //   if (countLevel <= INITIAL_GAME.level) {

@@ -2,12 +2,13 @@ import {questions} from '../data/game-data';
 import renderHeader from './header';
 import renderQuestion from './renderQuestions';
 import {render} from '../utils/util';
-import {questionTypes, changeLevels, check, calculateLives} from '../data/game-data';
+import {questionTypes, changeLevels, calculateLives, stats, calculateScore} from '../data/game-data';
 import {selectSlide} from '../utils/util';
 import INITIAL_GAME from '../data/game-data';
 import result from '../templates/result';
 import renderStats from './renderStats';
 import greeting from "../templates/greeting";
+import {getAnswer} from './getAnswer';
 
 const renderGameScreen = (state) => {
   const {lives, currentQuestion} = state;
@@ -27,56 +28,47 @@ const renderGameScreen = (state) => {
   const form = element.querySelector(`form`);
   const gameAnswers = element.querySelectorAll(`input`);
 
-  const testArr = INITIAL_GAME.test;
-
   switch (gameTitle) {
     case questionTypes.TWO_IMG:
-      let gameChoiceAll = null;
-      let gameChoice0 = null;
-      let gameChoice1 = null;
-      form.addEventListener(`change`, (evt) => {
-        let target = evt.target;
-        if (target.name === `question1`) {
-          gameChoice0 = target.value;
-        }
-        if (target.name === `question2`) {
-          gameChoice1 = target.value;
-        }
-        if (gameChoice0 && gameChoice1) {
-          gameChoiceAll = gameChoice0 + `,` + gameChoice1;
-          if (check(gameChoiceAll, INITIAL_GAME.currentQuestion)) {
-            testArr.push(1);
-            seeNextSlide();
-          } else {
-            testArr.push(0);
-            seeNextSlide();
-          }
-        }
-      });
-      break;
-    case questionTypes.PHOTO_OR_PAINT:
-      for (let i = 0; i < gameAnswers.length; i++) {
-        gameAnswers[i].addEventListener(`click`, () => {
-          testArr.push(2);
+      const seeGameTwo = (evt) => {
+        if ([...gameAnswers].filter((el) => el.checked).length === 2) {
+          getAnswer(evt, element);
           seeNextSlide();
-        });
-      }
+        }
+      };
+      form.addEventListener(`change`, seeGameTwo);
       break;
+
+    case questionTypes.PHOTO_OR_PAINT:
+      const seeGameWide = (evt) => {
+        if ([...gameAnswers].filter((el) => el.checked).length === 1) {
+          getAnswer(evt, element);
+          seeNextSlide();
+        }
+      };
+      form.addEventListener(`change`, seeGameWide);
+      break;
+
     case questionTypes.FIND_PAINT:
-      const selectPic = () => {
-        testArr.push(3);
+      const selectPic = (evt) => {
+        getAnswer(evt, element);
         seeNextSlide();
       };
       form.addEventListener(`click`, selectPic);
       break;
+
     default:
       return ``;
   }
 
   const seeNextSlide = () => {
     if (INITIAL_GAME.currentQuestion <= questions.length - 1) {
-      selectSlide(renderGameScreen(INITIAL_GAME));
+      INITIAL_GAME.lives = calculateLives(INITIAL_GAME.lives, INITIAL_GAME.answers[INITIAL_GAME.answers.length - 1]);
+      if (INITIAL_GAME.lives !== 0) {
+        selectSlide(renderGameScreen(INITIAL_GAME));
+      }
     } else {
+      console.log(calculateScore(INITIAL_GAME.answers, INITIAL_GAME.lives));
       selectSlide(result);
     }
     resetGame();
@@ -91,8 +83,6 @@ const renderGameScreen = (state) => {
     selectSlide(greeting);
   };
   backButton.addEventListener(`click`, backScreen);
-
-  INITIAL_GAME.lives = calculateLives(INITIAL_GAME.lives, INITIAL_GAME.test[INITIAL_GAME.test.length - 1]);
 
   return element;
 };
