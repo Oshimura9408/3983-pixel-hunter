@@ -1,5 +1,4 @@
-import {questions, stats, check} from '../data/game-data';
-import {STATE, calculateLives} from '../data/game-data';
+import {stats, check} from '../data/game-data';
 import {questionTypes} from '../data/game-data';
 import answersTypes from '../data/answersType';
 import INITIAL_GAME from "../data/game-data";
@@ -7,8 +6,6 @@ import INITIAL_GAME from "../data/game-data";
 export const getAnswer = (evt, element) => {
   const gameTitle = element.querySelector(`.game__task`).innerHTML;
   let gameChoiceAll = null;
-  let gameChoice0 = null;
-  let gameChoice1 = null;
   let target;
 
   switch (gameTitle) {

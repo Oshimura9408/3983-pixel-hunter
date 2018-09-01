@@ -1,11 +1,11 @@
 import {questions} from '../data/game-data';
 import renderHeader from './header';
 import renderQuestion from './renderQuestions';
+import renderResult from './renderResult';
 import {render} from '../utils/util';
-import {questionTypes, changeLevels, calculateLives, stats, calculateScore} from '../data/game-data';
+import {questionTypes, changeLevels, calculateLives, calculateScore, titleResult} from '../data/game-data';
 import {selectSlide} from '../utils/util';
 import INITIAL_GAME from '../data/game-data';
-import result from '../templates/result';
 import renderStats from './renderStats';
 import greeting from "../templates/greeting";
 import {getAnswer} from './getAnswer';
@@ -64,12 +64,12 @@ const renderGameScreen = (state) => {
   const seeNextSlide = () => {
     if (INITIAL_GAME.currentQuestion <= questions.length - 1) {
       INITIAL_GAME.lives = calculateLives(INITIAL_GAME.lives, INITIAL_GAME.answers[INITIAL_GAME.answers.length - 1]);
-      if (INITIAL_GAME.lives !== 0) {
+      if (INITIAL_GAME.lives >= 0) {
         selectSlide(renderGameScreen(INITIAL_GAME));
       }
     } else {
-      console.log(calculateScore(INITIAL_GAME.answers, INITIAL_GAME.lives));
-      selectSlide(result);
+      let score = calculateScore(INITIAL_GAME.answers, INITIAL_GAME.lives);
+      selectSlide(render(renderResult(titleResult.win, score, INITIAL_GAME.lives)));
     }
     resetGame();
   };

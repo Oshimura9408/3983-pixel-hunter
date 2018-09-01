@@ -1,6 +1,5 @@
 import {selectSlide, render} from '../utils/util.js';
 import greeting from './greeting.js';
-import game from './game.js';
 import renderGameScreen from '../components/renderGameScreen.js';
 import INITIAL_GAME from '../data/game-data';
 

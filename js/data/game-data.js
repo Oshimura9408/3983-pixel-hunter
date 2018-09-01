@@ -1,5 +1,5 @@
-import {selectSlide} from "../utils/util";
-import result from "../templates/result";
+import {selectSlide, render} from "../utils/util";
+import renderResult from '../components/renderResult';
 import answersTypes from './answersType';
 
 const INITIAL_GAME = {
@@ -7,6 +7,11 @@ const INITIAL_GAME = {
   lives: 3,
   currentQuestion: 0,
   answers: []
+};
+
+export const titleResult = {
+  win: `Победа!`,
+  lose: `Fail`
 };
 
 export const STATE = {
@@ -280,7 +285,7 @@ export const questions = [
 const NORMAL_ANSWER = 2;
 const SLOW_ANSWER = 1;
 const FAST_ANSWER = 3;
-const WRONG_ANSWER = 0;
+// const WRONG_ANSWER = 0;
 //
 const POINTS_NORMAL = 100;
 const POINTS_SLOW = 50;
@@ -307,7 +312,7 @@ export const calculateScore = (answers, live) => {
     return null;
   }
 
-  const result = answers.reduce((sumPoints, current) => {
+  const results = answers.reduce((sumPoints, current) => {
     if (current === NORMAL_ANSWER) {
       return sumPoints + POINTS_NORMAL;
     }
@@ -320,7 +325,7 @@ export const calculateScore = (answers, live) => {
     return sumPoints;
   }, 0);
 
-  return result + live * POINTS_LIFE;
+  return results + live * POINTS_LIFE;
 };
 //
 // export const calculateTime = (time) => {
@@ -348,7 +353,9 @@ export const calculateScore = (answers, live) => {
 export const calculateLives = (lifeValue, answerType) => {
   const newLifeValue = lifeValue - !answerType;
   if (newLifeValue <= 0) {
-    selectSlide(result);
+    // selectSlide(result);
+    let score = calculateScore(INITIAL_GAME.answers, INITIAL_GAME.lives);
+    selectSlide(render(renderResult(titleResult.lose, score, INITIAL_GAME.lives)));
   }
   return newLifeValue;
 };
