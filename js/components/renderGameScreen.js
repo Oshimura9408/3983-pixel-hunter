@@ -3,7 +3,7 @@ import renderHeader from './header';
 import renderQuestion from './renderQuestions';
 import renderResult from './renderResult';
 import {render} from '../utils/util';
-import {questionTypes, changeLevels, calculateLives, calculateScore, titleResult} from '../data/game-data';
+import {questionTypes, changeLevels, calculateLives, calculateScore, titleResult, stats} from '../data/game-data';
 import {selectSlide} from '../utils/util';
 import INITIAL_GAME from '../data/game-data';
 import renderStats from './renderStats';
@@ -19,7 +19,8 @@ const renderGameScreen = (state) => {
   const template = `
   ${renderHeader(lives)}
     ${renderQuestion(question)}
-    ${renderStats}
+    ${renderStats(stats)}
+    
   `;
 
   const element = render(template);
@@ -64,12 +65,13 @@ const renderGameScreen = (state) => {
   const seeNextSlide = () => {
     if (INITIAL_GAME.currentQuestion <= questions.length - 1) {
       INITIAL_GAME.lives = calculateLives(INITIAL_GAME.lives, INITIAL_GAME.answers[INITIAL_GAME.answers.length - 1]);
+
       if (INITIAL_GAME.lives >= 0) {
         selectSlide(renderGameScreen(INITIAL_GAME));
       }
     } else {
       let score = calculateScore(INITIAL_GAME.answers, INITIAL_GAME.lives);
-      selectSlide(render(renderResult(titleResult.win, score, INITIAL_GAME.lives)));
+      selectSlide(render(renderResult(titleResult.win, score, INITIAL_GAME.lives, stats)));
     }
     resetGame();
   };

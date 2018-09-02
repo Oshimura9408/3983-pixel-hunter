@@ -1,4 +1,6 @@
-const resultTemplate = (title, score, lives) => `
+import answerType from '../data/answersType';
+
+const resultTemplate = (title, score, lives, answers) => `
 <header class="header">
     <button class="back">
       <span class="visually-hidden">Вернуться к началу</span>
@@ -17,16 +19,7 @@ const resultTemplate = (title, score, lives) => `
         <td class="result__number">1.</td>
         <td colspan="2">
           <ul class="stats">
-            <li class="stats__result stats__result--wrong"></li>
-            <li class="stats__result stats__result--slow"></li>
-            <li class="stats__result stats__result--fast"></li>
-            <li class="stats__result stats__result--correct"></li>
-            <li class="stats__result stats__result--wrong"></li>
-            <li class="stats__result stats__result--unknown"></li>
-            <li class="stats__result stats__result--slow"></li>
-            <li class="stats__result stats__result--unknown"></li>
-            <li class="stats__result stats__result--fast"></li>
-            <li class="stats__result stats__result--unknown"></li>
+                  ${answers.map((answer) => `<li class="stats__result stats__result--${answer || answerType.UNKNOWN}"></li>`).join(``)}
           </ul>
         </td>
         <td class="result__points">× 100</td>

@@ -6,7 +6,7 @@ const INITIAL_GAME = {
   level: 0,
   lives: 3,
   currentQuestion: 0,
-  answers: []
+  answers: [],
 };
 
 export const titleResult = {
@@ -353,9 +353,8 @@ export const calculateScore = (answers, live) => {
 export const calculateLives = (lifeValue, answerType) => {
   const newLifeValue = lifeValue - !answerType;
   if (newLifeValue <= 0) {
-    // selectSlide(result);
     let score = calculateScore(INITIAL_GAME.answers, INITIAL_GAME.lives);
-    selectSlide(render(renderResult(titleResult.lose, score, INITIAL_GAME.lives)));
+    selectSlide(render(renderResult(titleResult.lose, score, INITIAL_GAME.lives, stats)));
   }
   return newLifeValue;
 };

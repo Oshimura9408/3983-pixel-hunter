@@ -1,18 +1,10 @@
-const renderStats = `
+import answerType from '../data/answersType';
+
+const renderStats = (answers) => `
 <section class="game">
 <ul class="stats">
-      <li class="stats__result stats__result--wrong"></li>
-      <li class="stats__result stats__result--slow"></li>
-      <li class="stats__result stats__result--fast"></li>
-      <li class="stats__result stats__result--correct"></li>
-      <li class="stats__result stats__result--unknown"></li>
-      <li class="stats__result stats__result--unknown"></li>
-      <li class="stats__result stats__result--unknown"></li>
-      <li class="stats__result stats__result--unknown"></li>
-      <li class="stats__result stats__result--unknown"></li>
-      <li class="stats__result stats__result--unknown"></li>
-    </ul>
-    </section>
+      ${answers.map((answer) => `<li class="stats__result stats__result--${answer || answerType.UNKNOWN}"></li>`).join(``)}
+</ul>
 `;
 
 export default renderStats;
