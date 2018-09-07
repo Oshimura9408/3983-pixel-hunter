@@ -1,4 +1,4 @@
 import {selectSlide} from "./utils/util.js";
-import intro from './templates/intro.js';
+import screenIntro from './templates/welcome';
 
-selectSlide(intro);
+selectSlide(screenIntro.element);

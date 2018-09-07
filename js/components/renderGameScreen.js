@@ -1,7 +1,7 @@
 import {questions} from '../data/game-data';
 import renderHeader from './header';
 import renderQuestion from './renderQuestions';
-import renderResult from './renderResult';
+import ResultView from './renderResult';
 import {render} from '../utils/util';
 import {questionTypes, changeLevels, calculateLives, calculateScore, titleResult, stats} from '../data/game-data';
 import {selectSlide} from '../utils/util';
@@ -20,7 +20,6 @@ const renderGameScreen = (state) => {
   ${renderHeader(lives)}
     ${renderQuestion(question)}
     ${renderStats(stats)}
-    
   `;
 
   const element = render(template);
@@ -71,7 +70,9 @@ const renderGameScreen = (state) => {
       }
     } else {
       let score = calculateScore(INITIAL_GAME.answers, INITIAL_GAME.lives);
-      selectSlide(render(renderResult(titleResult.win, score, INITIAL_GAME.lives, stats)));
+      const resultScreen = new ResultView(titleResult.win, score, INITIAL_GAME.lives, stats);
+      // selectSlide(render(renderResult(titleResult.win, score, INITIAL_GAME.lives, stats)));
+      selectSlide(resultScreen.element);
     }
     resetGame();
   };

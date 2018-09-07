@@ -1,5 +1,5 @@
-import {selectSlide, render} from "../utils/util";
-import renderResult from '../components/renderResult';
+import {selectSlide} from "../utils/util";
+import ResultView from '../components/renderResult';
 import answersTypes from './answersType';
 
 const INITIAL_GAME = {
@@ -354,7 +354,9 @@ export const calculateLives = (lifeValue, answerType) => {
   const newLifeValue = lifeValue - !answerType;
   if (newLifeValue <= 0) {
     let score = calculateScore(INITIAL_GAME.answers, INITIAL_GAME.lives);
-    selectSlide(render(renderResult(titleResult.lose, score, INITIAL_GAME.lives, stats)));
+    const resultScreen = new ResultView(titleResult.lose, score, INITIAL_GAME.lives, stats);
+    // selectSlide(resultScreen(titleResult.lose, score, INITIAL_GAME.lives, stats));
+    selectSlide(resultScreen.element);
   }
   return newLifeValue;
 };

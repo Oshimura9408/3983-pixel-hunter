@@ -1,6 +1,17 @@
 import answerType from '../data/answersType';
+import AbstractView from '../templates/abstract';
 
-const resultTemplate = (title, score, lives, answers) => `
+export default class ResultView extends AbstractView {
+  constructor(title, score, lives, answers) {
+    super();
+    this.title = title;
+    this.score = score;
+    this.lives = lives;
+    this.answers = answers;
+  }
+
+  get template() {
+    return `
 <header class="header">
     <button class="back">
       <span class="visually-hidden">Вернуться к началу</span>
@@ -13,29 +24,29 @@ const resultTemplate = (title, score, lives, answers) => `
     </button>
   </header>
   <section class="result">
-    <h2 class="result__title">${title}</h2>
+    <h2 class="result__title">${this.title}</h2>
     <table class="result__table">
       <tr>
         <td class="result__number">1.</td>
         <td colspan="2">
           <ul class="stats">
-                  ${answers.map((answer) => `<li class="stats__result stats__result--${answer || answerType.UNKNOWN}"></li>`).join(``)}
+                  ${this.answers.map((answer) => `<li class="stats__result stats__result--${answer || answerType.UNKNOWN}"></li>`).join(``)}
           </ul>
         </td>
         <td class="result__points">× 100</td>
-        <td class="result__total">${score - 50 * lives}</td>
+        <td class="result__total">${this.score - 50 * this.lives}</td>
       </tr>
       <tr>
         <td></td>
         <td class="result__extra">Бонус за жизни:</td>
-        <td class="result__extra">${lives} <span class="stats__result stats__result--alive"></span></td>
+        <td class="result__extra">${this.lives} <span class="stats__result stats__result--alive"></span></td>
         <td class="result__points">× 50</td>
-        <td class="result__total">${50 * lives}</td>
+        <td class="result__total">${50 * this.lives}</td>
       </tr>
       <tr>
-        <td colspan="5" class="result__total  result__total--final">${score}</td>
+        <td colspan="5" class="result__total  result__total--final">${this.score}</td>
       </tr>
     </table>
   `;
-
-export default resultTemplate;
+  }
+}

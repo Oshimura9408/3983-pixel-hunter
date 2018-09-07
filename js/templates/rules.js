@@ -1,9 +1,16 @@
-import {selectSlide, render} from '../utils/util.js';
+import {selectSlide} from '../utils/util.js';
 import greeting from './greeting.js';
 import renderGameScreen from '../components/renderGameScreen.js';
 import INITIAL_GAME from '../data/game-data';
+import AbstractView from './abstract';
 
-const template = `
+class RulesView extends AbstractView {
+  constructor() {
+    super();
+  }
+
+  get template() {
+    return `
 <header class="header">
     <button class="back">
       <span class="visually-hidden">Вернуться к началу</span>
@@ -32,33 +39,40 @@ const template = `
     </form>
   </section>
 `;
-
-const element = render(template);
-
-const nextButton = element.querySelector(`.rules__button`);
-const inputEl = element.querySelector(`.rules__input`);
-const backButton = element.querySelector(`.back`);
-const minName = 3;
-
-const nextScreen = () => {
-  selectSlide(renderGameScreen(INITIAL_GAME));
-};
-
-const backScreen = () => {
-  selectSlide(greeting);
-};
-
-inputEl .addEventListener(`input`, () => {
-  let name = inputEl.value;
-
-  if (name.trim().length >= minName) {
-    nextButton .disabled = false;
-  } else {
-    nextButton .disabled = true;
   }
-});
 
-nextButton.addEventListener(`click`, nextScreen);
-backButton.addEventListener(`click`, backScreen);
+  startGame() {
+    selectSlide(renderGameScreen(INITIAL_GAME));
+  }
 
-export default element;
+  backButton() {
+    selectSlide(greeting.element);
+  }
+
+  bind() {
+    const minName = 3;
+    const nextButton = this.element.querySelector(`.rules__button`);
+    const backButton = this.element.querySelector(`.back`);
+
+    nextButton.addEventListener(`click`, () => {
+      this.startGame();
+    });
+
+    backButton.addEventListener(`click`, () => {
+      this.backButton();
+    });
+
+    this._inputEl = this.element.querySelector(`.rules__input`);
+    this._inputEl.addEventListener(`input`, () => {
+      let name = this._inputEl.value;
+      if (name.trim().length >= minName) {
+        nextButton .disabled = false;
+      } else {
+        nextButton .disabled = true;
+      }
+    });
+  }
+}
+
+const screenRules = new RulesView();
+export default screenRules;
