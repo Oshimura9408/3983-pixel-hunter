@@ -2,7 +2,7 @@ import {selectSlide} from '../utils/util.js';
 import greeting from './greeting.js';
 import renderGameScreen from '../components/renderGameScreen.js';
 import INITIAL_GAME from '../data/game-data';
-import AbstractView from './abstract';
+import AbstractView from '../view/abstract-view';
 
 class RulesView extends AbstractView {
   constructor() {

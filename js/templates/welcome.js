@@ -1,4 +1,4 @@
-import AbstractView from './abstract';
+import AbstractView from '../view/abstract-view';
 import greeting from "./greeting";
 import {selectSlide} from "../utils/util";
 

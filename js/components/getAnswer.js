@@ -1,4 +1,4 @@
-import {stats, check} from '../data/game-data';
+import {stats, check, changeLevels} from '../data/game-data';
 import {questionTypes} from '../data/game-data';
 import answersTypes from '../data/answersType';
 import INITIAL_GAME from "../data/game-data";
@@ -58,4 +58,5 @@ export const getAnswer = (evt, element) => {
   };
 
   stats[INITIAL_GAME.currentQuestion - 1] = getTypeAnswer(INITIAL_GAME);
+  INITIAL_GAME.currentQuestion = changeLevels(INITIAL_GAME.currentQuestion);
 };

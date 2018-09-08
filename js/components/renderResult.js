@@ -1,5 +1,5 @@
 import answerType from '../data/answersType';
-import AbstractView from '../templates/abstract';
+import AbstractView from '../view/abstract-view';
 
 export default class ResultView extends AbstractView {
   constructor(title, score, lives, answers) {

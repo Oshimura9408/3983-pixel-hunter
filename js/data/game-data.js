@@ -297,7 +297,7 @@ const POINTS_LIFE = 50;
 // const NORMAL_TIME = 20;
 
 export const check = (chose, index) => {
-  if (chose === questions[index - 1].correctAnswers) {
+  if (chose === questions[index].correctAnswers) {
     return true;
   }
   return false;

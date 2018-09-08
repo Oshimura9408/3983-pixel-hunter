@@ -1,6 +1,6 @@
 import {selectSlide} from '../utils/util.js';
 import rules from './rules.js';
-import AbstractView from './abstract';
+import AbstractView from '../view/abstract-view';
 
 class GreetingView extends AbstractView {
   constructor() {
