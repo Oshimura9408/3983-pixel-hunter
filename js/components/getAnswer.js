@@ -57,6 +57,6 @@ export const getAnswer = (evt, element) => {
     }
   };
 
-  stats[INITIAL_GAME.currentQuestion - 1] = getTypeAnswer(INITIAL_GAME);
+  stats[INITIAL_GAME.currentQuestion] = getTypeAnswer(INITIAL_GAME);
   INITIAL_GAME.currentQuestion = changeLevels(INITIAL_GAME.currentQuestion);
 };
