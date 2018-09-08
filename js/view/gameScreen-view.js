@@ -1,6 +1,5 @@
 import AbstractView from './abstract-view';
-import {questions, questionTypes, stats, changeLevels} from "../data/game-data";
-import INITIAL_GAME from "../data/game-data";
+import {questions, questionTypes, stats} from "../data/game-data";
 import renderQuestion from "../components/renderQuestions";
 import renderHeader from "../components/header";
 import renderStats from "../components/renderStats";
