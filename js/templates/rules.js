@@ -1,6 +1,6 @@
 import {selectSlide} from '../utils/util.js';
 import greeting from './greeting.js';
-import renderGameScreen from '../components/renderGameScreen.js';
+import updateGame from '../components/renderGameScreen.js';
 import INITIAL_GAME from '../data/game-data';
 import AbstractView from '../view/abstract-view';
 
@@ -42,7 +42,7 @@ class RulesView extends AbstractView {
   }
 
   startGame() {
-    selectSlide(renderGameScreen(INITIAL_GAME));
+    selectSlide(updateGame(INITIAL_GAME));
   }
 
   backButton() {
