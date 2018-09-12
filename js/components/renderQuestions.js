@@ -1,36 +1,33 @@
-import renderChoose from './renderChoose';
-import renderSelect from './renderSelect';
+import GameOneTemplate from '../view/gameOne-view';
+import GameTwoTemplate from '../view/gameTwo-view';
+import GameThreeTemplate from '../view/gameThree-view';
 
-const renderQuestion = (level) => {
+let gameScreen;
+
+// const renderQuestion = (level) => {
+//   if (level.type === `TWO_IMG`) {
+//     gameScreen = new GameOneTemplate(level);
+//     return gameScreen.template;
+//   }
+//
+//   if (level.type === `FIND_PAINT`) {
+//     gameScreen = new GameTwoTemplate(level);
+//     return gameScreen.template;
+//   }
+//
+//   gameScreen = new GameThreeTemplate(level);
+//   return gameScreen.template;
+// };
+
+const getClass = (level) => {
   if (level.type === `TWO_IMG`) {
-    return `
-<section class="game">
-<p class="game__task">${level.description}</p>
-        <form class="game__content">
-          ${[...level.options].map(renderChoose).join(``)}
-        </form>
-        </section>
-`;
+    return GameOneTemplate;
   }
 
-  if (level.type === `FIND_PAINT`) {
-    return `
-<section class="game">
-<p class="game__task">${level.description}</p>
-        <form class="game__content game__content--triple">
-          ${[...level.options].map(renderSelect).join(``)}
-          </form> 
-          </section>`;
+  if (level.type === `PHOTO_OR_PAINT`) {
+    return GameTwoTemplate;
   }
-
-  return `
-<section class="game">
-<p class="game__task">${level.description}</p>
-        <form class="game__content game__content--wide">
-          ${renderChoose(level.option)}
-        </form>
-         </section>
-`;
+  return GameThreeTemplate;
 };
 
-export default renderQuestion;
+export default getClass;

@@ -1,7 +1,14 @@
-import {selectSlide, render} from '../utils/util.js';
+import {selectSlide} from '../utils/util.js';
 import rules from './rules.js';
+import AbstractView from '../view/abstract-view';
 
-const template = `
+class GreetingView extends AbstractView {
+  constructor() {
+    super();
+  }
+
+  get template() {
+    return `
 <section class="greeting central--blur">
     <img class="greeting__logo" src="img/logo_ph-big.svg" width="201" height="89" alt="Pixel Hunter">
     <div class="greeting__asterisk asterisk"><span class="visually-hidden">Я просто красивая звёздочка</span>*</div>
@@ -23,13 +30,19 @@ const template = `
     </button>
   </section>
 `;
+  }
 
-const element = render(template);
+  onClick() {
+    selectSlide(rules.element);
+  }
 
-const startButton = element.querySelector(`.greeting__continue`);
+  bind() {
+    this.element.querySelector(`.greeting__continue`).
+    addEventListener(`click`, () => {
+      this.onClick();
+    });
+  }
+}
 
-startButton.addEventListener(`click`, () => {
-  selectSlide(rules);
-});
-
-export default element;
+const screenGreeting = new GreetingView();
+export default screenGreeting;
