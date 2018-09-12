@@ -5,6 +5,8 @@ import renderHeader from "../components/header";
 import renderStats from "../components/renderStats";
 import {getAnswer} from "../components/getAnswer";
 
+import GameOneTemplate from '../view/gameOne-view';
+
 export default class GameView extends AbstractView {
   constructor(stat) {
     super();
@@ -15,9 +17,12 @@ export default class GameView extends AbstractView {
     const {lives, currentQuestion} = this.stat;
     const question = questions[currentQuestion];
 
+    const GameClass = renderQuestion(question);
+    const gameScreen = new GameClass(question);
+
     return `
     ${renderHeader(lives)}
-    ${renderQuestion(question)}
+    ${gameScreen.template}
     ${renderStats(stats)}
     `;
   }
