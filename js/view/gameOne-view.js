@@ -3,9 +3,10 @@ import renderChoose from "../components/renderChoose";
 import {getAnswer} from "../components/getAnswer";
 
 export default class GameOne extends AbstractView {
-  constructor(level) {
+  constructor(level, onAnswer) {
     super();
     this.level = level;
+    this.onAnswer = onAnswer;
   }
 
   get template() {
@@ -19,15 +20,12 @@ export default class GameOne extends AbstractView {
 `;
   }
 
-  onAnswer() {
-  }
-
-  bind() {
-    const form = this.element.querySelector(`form`);
-    const gameAnswers = this.element.querySelectorAll(`input`);
+  bind(element) {
+    const form = element.querySelector(`form`);
+    const gameAnswers = element.querySelectorAll(`input`);
     const seeGameTwo = (evt) => {
       if ([...gameAnswers].filter((el) => el.checked).length === 2) {
-        getAnswer(evt, this.element);
+        getAnswer(evt, element);
         this.onAnswer();
       }
     };
