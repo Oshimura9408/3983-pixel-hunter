@@ -1,8 +1,7 @@
-import {selectSlide} from '../utils/util.js';
-import rules from './rules.js';
 import AbstractView from '../view/abstract-view';
+import Application from '../aplication';
 
-class GreetingView extends AbstractView {
+export default class GreetingView extends AbstractView {
   constructor() {
     super();
   }
@@ -33,7 +32,7 @@ class GreetingView extends AbstractView {
   }
 
   onClick() {
-    selectSlide(rules.element);
+    Application.showRules();
   }
 
   bind() {
@@ -43,6 +42,3 @@ class GreetingView extends AbstractView {
     });
   }
 }
-
-const screenGreeting = new GreetingView();
-export default screenGreeting;

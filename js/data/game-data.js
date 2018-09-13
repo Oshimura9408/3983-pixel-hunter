@@ -1,6 +1,6 @@
-import {selectSlide} from "../utils/util";
-import ResultView from '../components/renderResult';
 import answersTypes from './answersType';
+
+import Application from '../aplication';
 
 const INITIAL_GAME = {
   level: 0,
@@ -354,9 +354,8 @@ export const calculateLives = (lifeValue, answerType) => {
   const newLifeValue = lifeValue - !answerType;
   if (newLifeValue <= 0) {
     let score = calculateScore(INITIAL_GAME.answers, INITIAL_GAME.lives);
-    const resultScreen = new ResultView(titleResult.lose, score, INITIAL_GAME.lives, stats);
-    // selectSlide(resultScreen(titleResult.lose, score, INITIAL_GAME.lives, stats));
-    selectSlide(resultScreen.element);
+
+    Application.showResult(titleResult.lose, score, INITIAL_GAME.lives, stats);
   }
   return newLifeValue;
 };

@@ -1,8 +1,7 @@
 import AbstractView from '../view/abstract-view';
-import greeting from "./greeting";
-import {selectSlide} from "../utils/util";
+import Application from '../aplication';
 
-class IntroView extends AbstractView {
+export default class IntroView extends AbstractView {
   constructor() {
     super();
   }
@@ -16,7 +15,7 @@ class IntroView extends AbstractView {
   }
 
   onClick() {
-    selectSlide(greeting.element);
+    Application.showGreeting();
   }
 
   bind() {
@@ -27,5 +26,3 @@ class IntroView extends AbstractView {
   }
 }
 
-const screenIntro = new IntroView();
-export default screenIntro;

@@ -1,10 +1,10 @@
 import {selectSlide} from '../utils/util.js';
-import greeting from './greeting.js';
 import updateGame from '../components/renderGameScreen.js';
 import INITIAL_GAME from '../data/game-data';
 import AbstractView from '../view/abstract-view';
+import Application from "../aplication";
 
-class RulesView extends AbstractView {
+export default class RulesView extends AbstractView {
   constructor() {
     super();
   }
@@ -46,7 +46,7 @@ class RulesView extends AbstractView {
   }
 
   backButton() {
-    selectSlide(greeting.element);
+    Application.showGreeting();
   }
 
   bind() {
@@ -73,6 +73,3 @@ class RulesView extends AbstractView {
     });
   }
 }
-
-const screenRules = new RulesView();
-export default screenRules;

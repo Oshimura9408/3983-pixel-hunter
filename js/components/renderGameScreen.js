@@ -1,9 +1,9 @@
 import {questions} from '../data/game-data';
-import ResultView from './renderResult';
 import {selectSlide} from '../utils/util';
 import {calculateLives, calculateScore, titleResult, stats} from '../data/game-data';
 import INITIAL_GAME from '../data/game-data';
 import GameView from '../view/gameScreen-view';
+import Application from '../aplication';
 
 const updateGame = (stat) => {
   const gameView = new GameView(stat);
@@ -17,8 +17,8 @@ const updateGame = (stat) => {
       }
     } else {
       let score = calculateScore(stat.answers, stat.lives);
-      const resultScreen = new ResultView(titleResult.win, score, stat.lives, stats);
-      selectSlide(resultScreen.element);
+
+      Application.showResult(titleResult.win, score, stat.lives, stats);
     }
   };
 
