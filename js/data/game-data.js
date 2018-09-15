@@ -2,30 +2,6 @@ import answersTypes from './answersType';
 
 import Application from '../aplication';
 
-const INITIAL_GAME = {
-  level: 0,
-  lives: 3,
-  currentQuestion: 0,
-  answers: [],
-};
-
-export const titleResult = {
-  win: `Победа!`,
-  lose: `Fail`
-};
-
-export const STATE = {
-  lives: 3,
-  answers: [],
-  currentQuestion: 0,
-};
-
-export const LEVEL = {
-  INITIAL: 0,
-  MAX: 10,
-  END: -1
-};
-
 export const stats = [
   answersTypes.UNKNOWN,
   answersTypes.UNKNOWN,
@@ -39,10 +15,24 @@ export const stats = [
   answersTypes.UNKNOWN
 ];
 
-// export const correct = [
-//   [`paint`, `photo`],
-//   `photo`
-// ];
+const INITIAL_GAME = {
+  level: 0,
+  lives: 3,
+  currentQuestion: 0,
+  answers: [],
+  answersTextType: stats.slice()
+};
+
+export const titleResult = {
+  win: `Победа!`,
+  lose: `Fail`
+};
+
+export const LEVEL = {
+  INITIAL: 0,
+  MAX: 10,
+  END: -1
+};
 
 export const questionTypes = {
   TWO_IMG: `Угадайте для каждого изображения фото или рисунок?`,

@@ -42,7 +42,8 @@ export default class RulesView extends AbstractView {
   }
 
   startGame() {
-    selectSlide(updateGame(INITIAL_GAME));
+    // selectSlide(updateGame(INITIAL_GAME));
+    Application.showGame();
   }
 
   backButton() {
